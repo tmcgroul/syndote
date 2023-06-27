@@ -84,6 +84,7 @@ impl Game {
         if self.players_queue.len() == NUMBER_OF_PLAYERS as usize {
             self.game_status = GameStatus::Play;
         }
+        gstd::debug!("player {:?} registered", player);
         msg::reply(GameEvent::Registered, 0)
             .expect("Error in sending a reply `GameEvent::Registered`");
     }
@@ -99,6 +100,7 @@ impl Game {
             if self.players_queue.len() <= 1 {
                 self.winner = self.players_queue[0];
                 self.game_status = GameStatus::Finished;
+                gstd::debug!("player {:?} is a winner", self.winner);
                 msg::reply(
                     GameEvent::GameFinished {
                         winner: self.winner,
@@ -166,7 +168,7 @@ impl Game {
                     player_info.position
                 } else {
                     let (r1, r2) = get_rolls();
-                    //     debug!("ROOLS {:?} {:?}", r1, r2);
+                    //     gstd::debug!("ROOLS {:?} {:?}", r1, r2);
                     let roll_sum = r1 + r2;
                     (player_info.position + roll_sum) % NUMBER_OF_CELLS
                 };

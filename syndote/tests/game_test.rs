@@ -8,7 +8,7 @@ fn game() {
     system.init_logger();
     let player_1 = Program::from_file(
         &system,
-        "../target/wasm32-unknown-unknown/debug/player.wasm",
+        "../target/wasm32-unknown-unknown/debug/winner.wasm",
     );
     let player_2 = Program::from_file(
         &system,
